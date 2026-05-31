@@ -101,7 +101,7 @@
         text-transform: uppercase;
         padding: 0.4rem 1.2rem;
         border-radius: 9999px;
-        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 4px 10px rgba(139, 94, 60, 0.3);
     }
 </style>
 @endpush

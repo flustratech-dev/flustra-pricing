@@ -29,17 +29,17 @@
                           linear-gradient(135deg, var(--primary-neon) 0%, var(--secondary-neon) 100%);
         background-origin: border-box;
         background-clip: padding-box, border-box;
-        box-shadow: 0 10px 40px rgba(196, 168, 124, 0.15);
+        box-shadow: 0 10px 40px rgba(139, 94, 60, 0.15);
     }
 
     .premium-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(139, 115, 85, 0.1);
+        box-shadow: 0 20px 40px rgba(139, 94, 60, 0.1);
         border-color: var(--primary-neon);
     }
 
     .border-neon-popular:hover {
-        box-shadow: 0 20px 40px rgba(196, 168, 124, 0.25);
+        box-shadow: 0 20px 40px rgba(139, 94, 60, 0.25);
     }
 
     /* Ambient card backgrounds */
@@ -50,13 +50,13 @@
         width: 150px;
         height: 150px;
         border-radius: 9999px;
-        background: radial-gradient(circle, rgba(196, 168, 124, 0.1) 0%, rgba(196, 168, 124, 0) 70%);
+        background: radial-gradient(circle, rgba(139, 94, 60, 0.1) 0%, rgba(139, 94, 60, 0) 70%);
         pointer-events: none;
         z-index: 0;
     }
 
     .card-ambient-glow-popular {
-        background: radial-gradient(circle, rgba(212, 184, 150, 0.18) 0%, rgba(212, 184, 150, 0) 70%);
+        background: radial-gradient(circle, rgba(139, 94, 60, 0.18) 0%, rgba(139, 94, 60, 0) 70%);
     }
 
     .card-badge {
@@ -101,7 +101,7 @@
         text-transform: uppercase;
         padding: 0.4rem 1.2rem;
         border-radius: 9999px;
-        box-shadow: 0 4px 10px rgba(196, 168, 124, 0.3);
+        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
     }
 </style>
 @endpush

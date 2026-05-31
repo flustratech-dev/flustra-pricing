@@ -19,18 +19,18 @@
     <!-- Custom Premium Styles -->
     <style>
         :root {
-            --bg-color: #FBF8F3;
-            --surface-color: #FDFBF7;
-            --surface-accent: #EDE0D0;
-            --primary-neon: #C4A87C;
-            --secondary-neon: #D4B896;
-            --accent-neon: #8B7355;
-            --text-main: #5a4634;
-            --text-muted: #8B7355;
-            --border-color: #EAE3D9;
-            --glass-bg: rgba(253, 251, 247, 0.85);
-            --glass-border: #EAE3D9;
-            --hover-bg: #E8DCC8;
+            --bg-color: #FDFBF7; /* cream-50 */
+            --surface-color: #F9F6EE; /* cream-100 */
+            --surface-accent: #EFEAE0; /* cream-200 */
+            --primary-neon: #8B5E3C; /* brown */
+            --secondary-neon: rgba(139, 94, 60, 0.8); /* brown/80 */
+            --accent-neon: #5E3E25; /* dark accent brown */
+            --text-main: #332D24; /* cream-900 */
+            --text-muted: #5C5243; /* cream-800 */
+            --border-color: #EFEAE0; /* cream-200 */
+            --glass-bg: rgba(249, 246, 238, 0.85); /* cream-100/80 */
+            --glass-border: rgba(239, 234, 224, 0.8); /* cream-200/50 */
+            --hover-bg: rgba(139, 94, 60, 0.1); /* brown/10 */
         }
 
         body {
@@ -48,7 +48,7 @@
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(196, 168, 124, 0.12) 0%, rgba(251, 248, 243, 0) 70%);
+            background: radial-gradient(circle, rgba(139, 94, 60, 0.12) 0%, rgba(253, 251, 247, 0) 70%);
             top: -200px;
             right: -100px;
             z-index: -1;
@@ -60,7 +60,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(139, 115, 85, 0.08) 0%, rgba(251, 248, 243, 0) 70%);
+            background: radial-gradient(circle, rgba(92, 82, 67, 0.08) 0%, rgba(253, 251, 247, 0) 70%);
             bottom: -100px;
             left: -100px;
             z-index: -1;
@@ -100,7 +100,7 @@
 
         .nav-link:hover, .nav-link.active {
             color: var(--text-main) !important;
-            text-shadow: 0 0 10px rgba(196, 168, 124, 0.2);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
         }
 
         /* Premium Buttons */
@@ -112,12 +112,12 @@
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(196, 168, 124, 0.25);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
         }
 
         .btn-neon-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 115, 85, 0.35);
+            box-shadow: 0 8px 30px rgba(30, 58, 138, 0.35);
             color: #ffffff !important;
         }
 
@@ -169,8 +169,9 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-expand-lg premium-nav sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="bi bi-box-fill text-info me-2"></i>FLUSTRA
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" class="me-2" style="height: 38px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(139, 94, 60, 0.15));">
+                <span>FLUSTRA</span>
             </a>
             <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
                 <i class="bi bi-list fs-2"></i>
@@ -225,8 +226,9 @@
     <footer>
         <div class="container text-center">
             <div class="mb-3">
-                <a class="navbar-brand fs-4" href="{{ route('home') }}">
-                    <i class="bi bi-box-fill text-info me-2"></i>FLUSTRA
+                <a class="navbar-brand d-inline-flex align-items-center fs-4" href="{{ route('home') }}">
+                    <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" class="me-2" style="height: 34px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(139, 94, 60, 0.15));">
+                    <span>FLUSTRA</span>
                 </a>
             </div>
             <p class="mb-1">&copy; {{ date('Y') }} Flustra. Hak Cipta Dilindungi Undang-Undang.</p>

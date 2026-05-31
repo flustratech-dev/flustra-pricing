@@ -21,7 +21,7 @@
     .form-control:focus, .form-select:focus {
         background-color: var(--bg-color) !important;
         border-color: var(--primary-neon) !important;
-        box-shadow: 0 0 10px rgba(196, 168, 124, 0.2) !important;
+        box-shadow: 0 0 10px rgba(139, 94, 60, 0.2) !important;
     }
 
     .form-label {
@@ -175,7 +175,7 @@
                 </div>
 
                 @if($billingCycle === 'yearly')
-                    <div class="alert border-0 rounded-4 p-3 mb-0" role="alert" style="background: rgba(196, 168, 124, 0.1); border: 1px solid rgba(196, 168, 124, 0.2) !important; color: var(--text-main);">
+                    <div class="alert border-0 rounded-4 p-3 mb-0" role="alert" style="background: rgba(139, 94, 60, 0.1); border: 1px solid rgba(139, 94, 60, 0.2) !important; color: var(--text-main);">
                         <i class="bi bi-gift-fill me-2 fs-5" style="color: var(--primary-neon);"></i>
                         <strong>Diskon 20% Terpasang!</strong>
                         <p class="small mb-0 mt-1">Anda menghemat {{ 'Rp ' . number_format(($plan->price_monthly * 12) - $plan->price_yearly, 0, ',', '.') }} dengan memilih paket tahunan.</p>

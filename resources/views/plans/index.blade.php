@@ -16,7 +16,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        box-shadow: 0 4px 10px rgba(139, 115, 85, 0.05);
+        box-shadow: 0 4px 10px rgba(139, 94, 60, 0.05);
     }
 
     .pricing-toggle-btn {
@@ -33,7 +33,7 @@
     .pricing-toggle-btn.active {
         background: linear-gradient(135deg, var(--primary-neon) 0%, var(--btn-hover) 100%);
         color: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(196, 168, 124, 0.25);
+        box-shadow: 0 4px 15px rgba(139, 94, 60, 0.25);
     }
 
     .category-title {

@@ -10,7 +10,7 @@
         border: 1px solid var(--border-color);
         border-radius: 32px;
         padding: 3rem;
-        box-shadow: 0 20px 50px rgba(139, 115, 85, 0.08);
+        box-shadow: 0 20px 50px rgba(139, 94, 60, 0.08);
         position: relative;
         overflow: hidden;
     }
@@ -20,7 +20,7 @@
         position: absolute;
         width: 300px;
         height: 300px;
-        background: radial-gradient(circle, rgba(196, 168, 124, 0.15) 0%, rgba(251, 248, 243, 0) 70%);
+        background: radial-gradient(circle, rgba(139, 94, 60, 0.15) 0%, rgba(253, 251, 247, 0) 70%);
         top: -100px;
         right: -100px;
         pointer-events: none;
@@ -69,7 +69,7 @@
     .pricing-toggle-btn.active {
         background: linear-gradient(135deg, var(--primary-neon) 0%, var(--btn-hover) 100%);
         color: #ffffff !important;
-        box-shadow: 0 4px 10px rgba(196, 168, 124, 0.2);
+        box-shadow: 0 4px 10px rgba(139, 94, 60, 0.2);
     }
 
     .feature-detail-item {
@@ -78,8 +78,8 @@
         gap: 1rem;
         padding: 0.8rem 1rem;
         border-radius: 12px;
-        background: rgba(253, 251, 247, 0.5);
-        border: 1px solid rgba(234, 227, 217, 0.5);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(226, 232, 240, 0.5);
         transition: all 0.3s ease;
     }
 
@@ -215,7 +215,7 @@
 
             <!-- Right Column: Full Features List -->
             <div class="col-12 col-lg-6 z-3">
-                <div class="p-4 rounded-4" style="background: rgba(253, 251, 247, 0.4); border: 1px solid var(--border-color);">
+                <div class="p-4 rounded-4" style="background: rgba(255, 255, 255, 0.4); border: 1px solid var(--border-color);">
                     <h4 class="fw-bold mb-4" style="color: var(--text-main);">
                         <i class="bi bi-check-all me-1" style="color: var(--primary-neon);"></i>Fitur Lengkap Paket
                     </h4>

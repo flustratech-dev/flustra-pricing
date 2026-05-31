@@ -19,20 +19,20 @@
     <!-- Custom Dashboard Styles -->
     <style>
         :root {
-            --bg-color: #FBF8F3;
-            --sidebar-bg: #FDFBF7;
-            --surface-color: #FDFBF7;
-            --primary-neon: #C4A87C;
-            --secondary-neon: #D4B896;
-            --text-main: #5a4634;
-            --text-muted: #8B7355;
-            --border-color: #EAE3D9;
+            --bg-color: #FDFBF7; /* cream-50 */
+            --sidebar-bg: #F9F6EE; /* cream-100 */
+            --surface-color: #F9F6EE; /* cream-100 */
+            --primary-neon: #8B5E3C; /* brown */
+            --secondary-neon: rgba(139, 94, 60, 0.8); /* brown/80 */
+            --text-main: #332D24; /* cream-900 */
+            --text-muted: #5C5243; /* cream-800 */
+            --border-color: #EFEAE0; /* cream-200 */
             
-            --hover-bg: #E8DCC8;
-            --active-bg: #EDE0D0;
-            --active-text: #5a4634;
-            --toggle-bg: #705C45;
-            --toggle-hover: #5A4936;
+            --hover-bg: rgba(139, 94, 60, 0.1); /* brown/10 */
+            --active-bg: #EFEAE0; /* cream-200 */
+            --active-text: #332D24; /* cream-900 */
+            --toggle-bg: #8B5E3C; /* brown */
+            --toggle-hover: #5E3E25; /* dark accent brown */
         }
 
         body {
@@ -204,7 +204,7 @@
             border: 1px solid var(--border-color) !important;
             color: var(--text-main) !important;
             border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(139, 115, 85, 0.05), 0 2px 4px -2px rgba(139, 115, 85, 0.05) !important;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.05), 0 2px 4px -2px rgba(30, 58, 138, 0.05) !important;
             overflow: hidden;
         }
 
@@ -234,26 +234,26 @@
         }
 
         .bg-opacity-10 {
-            background-color: rgba(196, 168, 124, 0.12) !important;
+            background-color: rgba(59, 130, 246, 0.12) !important;
         }
 
         /* Premium Buttons */
         .btn-neon-primary {
             background: linear-gradient(135deg, var(--primary-neon) 0%, var(--secondary-neon) 100%) !important;
-            color: var(--active-text) !important;
+            color: #ffffff !important;
             border: 1px solid var(--border-color) !important;
             font-weight: 600;
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(196, 168, 124, 0.15);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
         }
 
         .btn-neon-primary:hover {
             background: linear-gradient(135deg, var(--secondary-neon) 0%, var(--primary-neon) 100%) !important;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(196, 168, 124, 0.25);
-            color: var(--active-text) !important;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+            color: #ffffff !important;
         }
 
         .btn-neon-secondary {
@@ -316,7 +316,7 @@
         
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-neon) !important;
-            box-shadow: 0 0 0 0.25rem rgba(196, 168, 124, 0.25) !important;
+            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
         }
     </style>
     @stack('styles')

@@ -17,7 +17,7 @@
         transform: translate(-50%, -50%);
         width: 800px;
         height: 400px;
-        background: radial-gradient(circle, rgba(196, 168, 124, 0.08) 0%, rgba(139, 115, 85, 0.05) 50%, rgba(251, 248, 243, 0) 80%);
+        background: radial-gradient(circle, rgba(139, 94, 60, 0.08) 0%, rgba(92, 82, 67, 0.05) 50%, rgba(253, 251, 247, 0) 80%);
         z-index: -1;
         pointer-events: none;
     }

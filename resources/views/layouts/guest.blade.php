@@ -24,7 +24,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased bg-gradient-to-br from-[#FFFDFB] via-[#FAF3E8] to-[#F1E4D0] min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <body class="font-sans text-cream-900 antialiased bg-gradient-to-br from-[#FDFBF7] via-[#F9F6EE] to-[#EFEAE0] min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
         {{ $slot }}
     </body>
 </html>

@@ -72,35 +72,95 @@
             color: var(--text-main);
         }
 
-        /* Premium Glass Navbar */
+        /* Google Antigravity-Style Premium Navbar */
         .premium-nav {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 1rem 0;
+            background: transparent;
+            border-bottom: none;
+            padding: 1.2rem 0;
             z-index: 1000;
         }
 
         .navbar-brand {
             font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--text-main) 0%, var(--text-muted) 50%, var(--primary-neon) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--text-main) !important;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: unset !important;
             letter-spacing: -0.5px;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar-brand:hover {
+            opacity: 0.85;
         }
 
         .nav-link {
-            color: var(--text-muted) !important;
+            color: var(--text-main) !important;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.92rem;
+            padding: 0.5rem 1.1rem !important;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            margin: 0 0.15rem;
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover {
             color: var(--text-main) !important;
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+            background-color: rgba(139, 94, 60, 0.08); /* subtle warm pill background */
+        }
+
+        .nav-link.active {
+            color: var(--text-main) !important;
+            font-weight: 600;
+            background-color: rgba(139, 94, 60, 0.05); /* subtle warm active pill */
+        }
+
+        /* Google Antigravity-Style Pill Buttons */
+        .nav-btn-primary {
+            background: var(--text-main) !important;
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn-primary:hover {
+            background: var(--accent-neon) !important;
+            color: #ffffff !important;
+        }
+
+        .nav-btn-secondary {
+            background: transparent !important;
+            color: var(--text-main) !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px !important;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn-secondary:hover {
+            background: rgba(139, 94, 60, 0.08) !important;
+            color: var(--text-main) !important;
+        }
+
+        .nav-btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
         }
 
         /* Premium Buttons */
@@ -112,12 +172,12 @@
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 4px 20px rgba(139, 94, 60, 0.25);
         }
 
         .btn-neon-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(30, 58, 138, 0.35);
+            box-shadow: 0 8px 30px rgba(139, 94, 60, 0.35);
             color: #ffffff !important;
         }
 
@@ -167,18 +227,18 @@
 <body>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-expand-lg premium-nav sticky-top">
+    <nav class="navbar navbar-expand-lg premium-nav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" class="me-2" style="height: 38px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(139, 94, 60, 0.15));">
+                <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" class="me-2" style="height: 32px; width: auto; object-fit: contain;">
                 <span>FLUSTRA</span>
             </a>
-            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-label="Toggle navigation">
                 <i class="bi bi-list fs-2"></i>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                     </li>
@@ -201,16 +261,16 @@
 
                 <div class="d-flex align-items-center gap-3">
                     @auth
-                        <span class="text-light small d-none d-sm-inline">Halo, <strong>{{ auth()->user()->name }}</strong></span>
+                        <span class="small d-none d-sm-inline" style="color: #5c5243;">Halo, <strong>{{ auth()->user()->name }}</strong></span>
                         <form method="POST" action="{{ route('logout') }}" class="m-0">
                             @csrf
-                            <button type="submit" class="btn btn-neon-secondary btn-sm">
+                            <button type="submit" class="nav-btn-secondary nav-btn-sm">
                                 <i class="bi bi-box-arrow-right me-1"></i>Keluar
                             </button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-neon-secondary">Masuk</a>
-                        <a href="{{ route('register') }}" class="btn btn-neon-primary">Daftar</a>
+                        <a href="{{ route('login') }}" class="nav-btn-secondary">Masuk</a>
+                        <a href="{{ route('register') }}" class="nav-btn-primary">Daftar</a>
                     @endauth
                 </div>
             </div>

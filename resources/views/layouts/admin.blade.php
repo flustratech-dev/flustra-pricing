@@ -204,7 +204,7 @@
             border: 1px solid var(--border-color) !important;
             color: var(--text-main) !important;
             border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.05), 0 2px 4px -2px rgba(30, 58, 138, 0.05) !important;
+            box-shadow: 0 4px 6px -1px rgba(139, 94, 60, 0.05), 0 2px 4px -2px rgba(139, 94, 60, 0.05) !important;
             overflow: hidden;
         }
 
@@ -234,7 +234,7 @@
         }
 
         .bg-opacity-10 {
-            background-color: rgba(59, 130, 246, 0.12) !important;
+            background-color: rgba(139, 94, 60, 0.12) !important;
         }
 
         /* Premium Buttons */
@@ -246,13 +246,13 @@
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 4px 15px rgba(139, 94, 60, 0.15);
         }
 
         .btn-neon-primary:hover {
             background: linear-gradient(135deg, var(--secondary-neon) 0%, var(--primary-neon) 100%) !important;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 6px 20px rgba(139, 94, 60, 0.25);
             color: #ffffff !important;
         }
 
@@ -316,7 +316,7 @@
         
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-neon) !important;
-            box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
+            box-shadow: 0 0 0 0.25rem rgba(139, 94, 60, 0.25) !important;
         }
     </style>
     @stack('styles')

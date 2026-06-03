@@ -182,36 +182,39 @@
 
         /* Premium Buttons */
         .btn-neon-primary {
-            background: linear-gradient(135deg, var(--primary-neon) 0%, var(--accent-neon) 100%);
+            background: linear-gradient(135deg, #A07C5F 0%, #825E43 100%);
             color: #ffffff !important;
             border: none;
             font-weight: 600;
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(139, 94, 60, 0.25);
+            box-shadow: 0 4px 12px rgba(130, 94, 67, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .btn-neon-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 94, 60, 0.35);
+            box-shadow: 0 6px 18px rgba(130, 94, 67, 0.18), 0 2px 5px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, #8D6B4E 0%, #704D34 100%);
             color: #ffffff !important;
         }
 
         .btn-neon-secondary {
-            background: var(--surface-accent);
+            background: #ffffff;
             border: 1px solid var(--border-color);
             color: var(--text-main) !important;
             font-weight: 600;
             padding: 0.6rem 1.5rem;
             border-radius: 12px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         .btn-neon-secondary:hover {
-            background: var(--hover-bg);
+            background: var(--surface-color);
             color: var(--text-main) !important;
             border-color: var(--primary-neon);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         /* Footers */

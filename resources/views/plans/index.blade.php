@@ -31,9 +31,9 @@
     }
 
     .pricing-toggle-btn.active {
-        background: linear-gradient(135deg, var(--primary-neon) 0%, var(--btn-hover) 100%);
+        background: linear-gradient(135deg, #A07C5F 0%, #825E43 100%);
         color: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(139, 94, 60, 0.25);
+        box-shadow: 0 4px 12px rgba(130, 94, 67, 0.15);
     }
 
     .category-title {
@@ -65,12 +65,14 @@
     
     <!-- Header Section -->
     <div class="pricing-header text-center">
-        <span class="badge px-3 py-2 rounded-pill mb-3" style="background-color: var(--surface-accent); color: var(--text-main); border: 1px solid var(--border-color);">
-            <i class="bi bi-tag-fill me-1" style="color: var(--primary-neon);"></i>Paket Penawaran Terbaik
-        </span>
+        <div class="d-flex align-items-center justify-content-center gap-2 mb-4 reveal-scale">
+            <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" style="height: 26px; width: auto; object-fit: contain;">
+            <span class="font-brand tracking-wider" style="color: var(--text-main); font-weight: 800; font-size: 0.95rem; letter-spacing: 1.2px;">FLUSTRA</span>
+        </div>
+
         <h1 class="display-3 fw-extrabold mb-3 tracking-tight" style="color: var(--text-main);">Investasi Cerdas untuk Finansial Anda</h1>
-        <p class="lead max-w-2xl mx-auto mb-4" style="max-width: 600px; margin: 0 auto; color: var(--text-muted) !important;">
-            Pilih paket premium yang paling sesuai dengan kebutuhan pencatatan dan pengelolaan aset Anda. Bebas upgrade, downgrade, atau batalkan kapan saja.
+        <p class="lead max-w-2xl mx-auto mb-4" style="max-width: 600px; margin: 0 auto; color: var(--text-muted) !important; font-size: 0.8rem; line-height: 1.5;">
+            "Pilih paket yang sesuai dengan kebutuhan finansial Anda. Fleksibel—bebas ganti atau batalkan kapan saja."
         </p>
 
         <!-- Dynamic Billing Toggle -->

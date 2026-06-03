@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5 CSS & Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,38 +33,55 @@
             --hover-bg: rgba(139, 94, 60, 0.1); /* brown/10 */
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
-            overflow-x: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
         }
 
         /* Ambient Glow Backgrounds */
-        body::before {
-            content: '';
+        .ambient-glow-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-top {
             position: absolute;
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(139, 94, 60, 0.12) 0%, rgba(253, 251, 247, 0) 70%);
             top: -200px;
             right: -100px;
-            z-index: -1;
-            pointer-events: none;
         }
 
-        body::after {
-            content: '';
+        .glow-bottom {
             position: absolute;
             width: 500px;
             height: 500px;
             background: radial-gradient(circle, rgba(92, 82, 67, 0.08) 0%, rgba(253, 251, 247, 0) 70%);
             bottom: -100px;
             left: -100px;
-            z-index: -1;
-            pointer-events: none;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -205,6 +222,7 @@
             margin-top: 5rem;
             color: var(--text-muted);
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         /* Custom Scrollbar */
@@ -221,10 +239,99 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-neon);
         }
+
+        /* Custom Font Mappings */
+        .font-brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        .font-serif-italic {
+            font-family: 'Lora', Georgia, serif;
+            font-style: italic;
+        }
+
+        .font-neue {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Scroll / Load Reveal Animations */
+        @keyframes maskUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal-mask-up {
+            animation: maskUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .reveal-scale {
+            animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Micro-animations */
+        .magnetic-btn {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.2, 1);
+        }
+
+        .magnetic-btn:hover {
+            transform: scale(1.04) translateY(-1px);
+        }
+
+        .magnetic-btn-content {
+            display: inline-block;
+        }
+
+        /* Social icons & link styles */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.08);
+            color: var(--primary-neon) !important;
+        }
+
+        .footer-link {
+            display: inline-block;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .footer-link:hover {
+            transform: translateX(4px);
+            color: var(--primary-neon) !important;
+        }
     </style>
     @stack('styles')
 </head>
 <body>
+    <!-- Ambient Background Glows -->
+    <div class="ambient-glow-wrapper" aria-hidden="true">
+        <div class="glow-top"></div>
+        <div class="glow-bottom"></div>
+    </div>
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-expand-lg premium-nav">
@@ -283,16 +390,107 @@
     </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <div class="mb-3">
-                <a class="navbar-brand d-inline-flex align-items-center fs-4" href="{{ route('home') }}">
-                    <img src="{{ asset('images/flustraa.png') }}" alt="Flustra Logo" class="me-2" style="height: 34px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(139, 94, 60, 0.15));">
-                    <span>FLUSTRA</span>
-                </a>
+    <footer class="py-5 border-top relative z-20" style="background-color: var(--surface-color); border-color: var(--border-color) !important;">
+        <div class="container reveal-mask-up">
+            <div class="row g-4 text-start">
+                <div class="col-12 col-md-6">
+                    <a href="{{ route('home') }}"
+                        class="font-brand fs-2 text-decoration-none mb-3 d-block anim-fill-text-light magnetic-btn"
+                        style="color: var(--text-main);">
+                        <span class="magnetic-btn-content">FLUSTRA.</span>
+                    </a>
+                    <p class="font-serif-italic max-w-sm anim-fill-text-light" style="color: var(--text-muted); max-width: 380px;">
+                        Meningkatkan kejelasan keuangan melalui desain yang indah dan rekayasa yang tangguh.
+                    </p>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <h5 class="font-neue fw-bold mb-3 uppercase tracking-wider small anim-fill-text-brown reveal-scale"
+                        style="color: var(--primary-neon); letter-spacing: 0.05em;">
+                        PRODUK
+                    </h5>
+                    <ul class="space-y-2 font-neue small ps-0 list-unstyled">
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="{{ route('home') }}#features" class="footer-link text-decoration-none" style="color: var(--text-muted);">Fitur</a>
+                        </li>
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="{{ route('plans.index') }}" class="footer-link text-decoration-none" style="color: var(--text-muted);">Harga</a>
+                        </li>
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="#" class="footer-link text-decoration-none" style="color: var(--text-muted);">Keamanan</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <h5 class="font-neue fw-bold mb-3 uppercase tracking-wider small anim-fill-text-brown reveal-scale"
+                        style="color: var(--primary-neon); letter-spacing: 0.05em;">
+                        PERUSAHAAN
+                    </h5>
+                    <ul class="space-y-2 font-neue small ps-0 list-unstyled">
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="#" class="footer-link text-decoration-none" style="color: var(--text-muted);">Tentang Kami</a>
+                        </li>
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="#" class="footer-link text-decoration-none" style="color: var(--text-muted);">Kontak</a>
+                        </li>
+                        <li class="anim-fill-text-light mb-2">
+                            <a href="#" class="footer-link text-decoration-none" style="color: var(--text-muted);">Kebijakan Privasi</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <p class="mb-1">&copy; {{ date('Y') }} Flustra. Hak Cipta Dilindungi Undang-Undang.</p>
-            <p class="small text-secondary">Premium Pricing & Subscription Management Suite.</p>
+            
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-5 pt-4 border-top" 
+                 style="border-color: var(--border-color) !important;">
+                <p class="anim-fill-text-light small mb-0" style="color: var(--text-muted);">&copy; {{ date('Y') }} Flustra Financial. Hak cipta dilindungi undang-undang.</p>
+                <div class="d-flex gap-4 mt-3 mt-md-0">
+                    <a href="https://www.instagram.com/flustra.id?igsh=MWN0ejAzOHZ5aGdxbw=="
+                        class="footer-link social-icon text-decoration-none" aria-label="Instagram" style="color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                    </a>
+
+                    <a href="#" class="footer-link social-icon text-decoration-none" aria-label="Threads" style="color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                 d="M22 11c-1.4-4.8-5.3-8.5-9.9-8.5C5.9 2.5 2 7.2 2 12c0 4.9 3.9 9.5 10.2 9.5 2.6 0 5-.8 6.8-2.3 1.3-1 1.9-2.6 2-4.1v-.3c0-1.8-1.1-3.3-2.7-3.3-1 0-1.9.6-2.4 1.5-1.1 1.9-2.1 3-4.2 3-2.1 0-4-1.6-4-4s1.9-4 4-4c1.7 0 3.3 1.1 3.7 2.7.2.7.1 1.4-.3 2-.4.6-1 .9-1.7.9h-2.1">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="https://x.com/flustraid?s=21"
+                        class="footer-link social-icon text-decoration-none" aria-label="X" style="color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                        </svg>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@flustra.id?_r=1&_t=ZS-96WZbhM441c"
+                        class="footer-link social-icon text-decoration-none" aria-label="TikTok" style="color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                        </svg>
+                    </a>
+
+                    <a href="#" class="footer-link social-icon text-decoration-none" aria-label="LinkedIn" style="color: var(--text-muted);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect width="4" height="12" x="2" y="9"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </footer>
 

@@ -76,8 +76,8 @@
         <!-- Checkbox Persetujuan Syarat & Ketentuan -->
         <div class="auth-checkbox @error('terms') is-error @enderror">
             <input type="checkbox" name="terms" id="terms" value="1" required @checked(old('terms'))>
-            <label for="terms">
-                Saya menyetujui <a href="#">Syarat & Ketentuan Layanan</a> yang berlaku.
+            <label for="remember">
+                Saya menyetujui <a href="https://flustra.jagoankode.my.id/syarat-dan-ketentuan">Syarat & Ketentuan</a> serta <a href="https://flustra.jagoankode.my.id/kebijakan-privasi">Kebijakan Privasi</a> Flustra.
             </label>
             @error('terms')
                 <span class="auth-field-error d-block w-100"><i class="bi bi-exclamation-circle me-1"></i>{{ $message }}</span>

@@ -100,13 +100,25 @@
     <!-- Plans grouped by Category -->
     @foreach(['personal' => 'Paket Personal', 'family' => 'Paket Keluarga', 'business' => 'Paket Bisnis Enterprise'] as $category => $label)
         @if(isset($plans[$category]) && count($plans[$category]) > 0)
+            @php
+                $planCount = count($plans[$category]);
+                $rowClass = $planCount === 1 ? 'justify-content-center' : 'justify-content-center justify-content-md-start';
+                
+                if ($planCount === 1) {
+                    $columnClass = 'col-12';
+                } elseif ($planCount === 4) {
+                    $columnClass = 'col-12 col-md-6 col-lg-3';
+                } else {
+                    $columnClass = 'col-12 col-md-6 col-lg-4';
+                }
+            @endphp
             <div class="mb-5 py-4" id="{{ $category }}-section">
                 <h3 class="category-title">{{ $label }}</h3>
                 
-                <div class="row g-4 justify-content-center justify-content-md-start">
+                <div class="row g-4 {{ $rowClass }}">
                     @foreach($plans[$category] as $plan)
-                        <div class="col-12 col-md-6 col-lg-4">
-                            @include('plans.components.plan-card', ['plan' => $plan])
+                        <div class="{{ $columnClass }}">
+                            @include('plans.components.plan-card', ['plan' => $plan, 'horizontal' => $planCount === 1])
                         </div>
                     @endforeach
                 </div>

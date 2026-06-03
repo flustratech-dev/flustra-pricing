@@ -68,7 +68,6 @@
 
 @section('content')
 <div class="hero-section text-center">
-    <div class="hero-glow"></div>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
@@ -89,14 +88,11 @@
                     <a href="{{ route('plans.index') }}" class="btn btn-neon-primary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
                         <i class="bi bi-tag-fill me-2"></i>Lihat Paket Harga
                     </a>
-                    @auth
-                        <a href="{{ route('subscription.index') }}" class="btn btn-neon-secondary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
-                            <i class="bi bi-speedometer2 me-2"></i>Dashboard Saya
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-neon-secondary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
-                            <i class="bi bi-box-arrow-in-right me-2"></i>Masuk Akun
-                        </a>
+                        @auth
+                            <a href="{{ route('subscription.index') }}" class="btn btn-neon-secondary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
+                                <i class="bi bi-speedometer2 me-2"></i>Dashboard Saya
+                            </a>
+                        @else
                     @endauth
                 </div>
 

@@ -330,11 +330,7 @@
     @stack('styles')
 </head>
 <body>
-    <!-- Ambient Background Glows -->
-    <div class="ambient-glow-wrapper" aria-hidden="true">
-        <div class="glow-top"></div>
-        <div class="glow-bottom"></div>
-    </div>
+
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-expand-lg premium-nav">

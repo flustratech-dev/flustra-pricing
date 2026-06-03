@@ -101,6 +101,12 @@ class PlanFeatureSeeder extends Seeder
                 ['name' => 'Ekspor Data Enterprise', 'icon' => 'bi-download'],
                 ['name' => 'Laporan Siap Pajak', 'icon' => 'bi-file-text'],
                 ['name' => 'SLA 99.9% GUARANTEED', 'icon' => 'bi-shield-check'],
+                ['name' => 'Integrasi Rekening Bank Otomatis', 'icon' => 'bi-bank'],
+                ['name' => 'Manajemen Multi-Cabang & Departemen', 'icon' => 'bi-diagram-3'],
+                ['name' => 'Prediksi Arus Kas AI (Forecast)', 'icon' => 'bi-cpu'],
+                ['name' => 'Sistem Invoice & Tagihan Terjadwal', 'icon' => 'bi-receipt'],
+                ['name' => 'Kustomisasi Laporan Keuangan', 'icon' => 'bi-file-earmark-bar-graph'],
+                ['name' => 'Akses API & Integrasi Aplikasi', 'icon' => 'bi-code-slash'],
             ]);
         }
     }

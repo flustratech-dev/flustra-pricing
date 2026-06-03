@@ -67,9 +67,9 @@
     }
 
     .pricing-toggle-btn.active {
-        background: linear-gradient(135deg, var(--primary-neon) 0%, var(--btn-hover) 100%);
+        background: linear-gradient(135deg, #A07C5F 0%, #825E43 100%);
         color: #ffffff !important;
-        box-shadow: 0 4px 10px rgba(139, 94, 60, 0.2);
+        box-shadow: 0 4px 12px rgba(130, 94, 67, 0.15);
     }
 
     .feature-detail-item {

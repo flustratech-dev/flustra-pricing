@@ -89,7 +89,7 @@
                         <i class="bi bi-tag-fill me-2"></i>Lihat Paket Harga
                     </a>
                         @auth
-                            <a href="{{ route('subscription.index') }}" class="btn btn-neon-secondary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
+                            <a href="{{ route('dashboard') }}" class="btn btn-neon-secondary px-4 py-3 rounded-pill d-inline-flex align-items-center justify-content-center" style="min-width: 200px; font-size: 1rem;">
                                 <i class="bi bi-speedometer2 me-2"></i>Dashboard Saya
                             </a>
                         @else

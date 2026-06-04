@@ -353,7 +353,7 @@
                     </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('subscription.*') ? 'active' : '' }}" href="{{ route('subscription.index') }}">Dashboard Saya</a>
+                            <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Dashboard Saya</a>
                         </li>
                         @if(auth()->user()->is_admin)
                             <li class="nav-item">

@@ -16,15 +16,27 @@
     <form class="auth-form" action="{{ route('register') }}" method="POST">
         @csrf
 
-        <!-- Field Nama Lengkap -->
-        <div class="auth-field @error('name') is-error @enderror {{ old('name') ? 'has-value' : '' }}">
-            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder=" " required autocomplete="name" autofocus>
-            <label class="auth-float-label" for="name">
-                <i class="bi bi-person"></i> Nama Lengkap
-            </label>
-            @error('name')
-                <span class="auth-field-error"><i class="bi bi-exclamation-circle me-1"></i>{{ $message }}</span>
-            @enderror
+        <!-- Baris Input Nama Lengkap & Username berdampingan -->
+        <div class="auth-field-row">
+            <div class="auth-field @error('name') is-error @enderror {{ old('name') ? 'has-value' : '' }}">
+                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder=" " required autocomplete="name" autofocus>
+                <label class="auth-float-label" for="name">
+                    <i class="bi bi-person"></i> Nama Lengkap
+                </label>
+                @error('name')
+                    <span class="auth-field-error"><i class="bi bi-exclamation-circle me-1"></i>{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="auth-field @error('username') is-error @enderror {{ old('username') ? 'has-value' : '' }}">
+                <input type="text" name="username" id="username" value="{{ old('username') }}" placeholder=" " required autocomplete="username">
+                <label class="auth-float-label" for="username">
+                    <i class="bi bi-at"></i> Username
+                </label>
+                @error('username')
+                    <span class="auth-field-error"><i class="bi bi-exclamation-circle me-1"></i>{{ $message }}</span>
+                @enderror
+            </div>
         </div>
 
         <!-- Baris Input Email & Telepon berdampingan -->

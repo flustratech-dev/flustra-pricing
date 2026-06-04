@@ -14,10 +14,11 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@flustra.com'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Flustra Admin',
-                'password' => Hash::make('password123'),
+                'username' => 'admin',
+                'password' => Hash::make('12345678'),
                 'is_admin' => true,
                 'email_verified_at' => now(),
             ]

@@ -1,93 +1,152 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Dashboard')
+
 @section('content')
-<div class="row g-4">
-    <!-- Welcome Card -->
-    <div class="col-12">
-        <div class="card border-0 p-4" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.15) !important;">
-            <div class="d-flex align-items-center gap-4">
-                <div class="fs-1 text-warning"><i class="bi bi-rocket-takeoff-fill"></i></div>
-                <div>
-                    <h3 class="fw-bold text-white mb-1">Selamat Datang di Flustra Admin Panel</h3>
-                    <p class="text-secondary mb-0" style="color: var(--text-muted);">Di sini Anda dapat mengelola paket penawaran, langganan pengguna, serta memantau omset MRR Anda secara real-time.</p>
+<!-- Metric Cards -->
+<div class="row g-3">
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <div class="metric-icon bg-primary bg-opacity-10 text-primary">
+                <i class="bi bi-tags"></i>
+            </div>
+            <div>
+                <div class="text-muted small">Paket Aktif</div>
+                <div class="fs-4 fw-bold lh-1 mt-1">{{ \App\Models\Plan::active()->count() ?? 0 }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <div class="metric-icon bg-success bg-opacity-10 text-success">
+                <i class="bi bi-people"></i>
+            </div>
+            <div>
+                <div class="text-muted small">Langganan Aktif</div>
+                <div class="fs-4 fw-bold lh-1 mt-1">{{ \App\Models\Subscription::active()->count() ?? 0 }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <div class="metric-icon bg-warning bg-opacity-10 text-warning">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+            <div>
+                <div class="text-muted small">Tagihan Tertunda</div>
+                <div class="fs-4 fw-bold lh-1 mt-1">{{ \App\Models\Invoice::where('status', 'pending')->count() ?? 0 }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card p-3 d-flex flex-row align-items-center gap-3">
+            <div class="metric-icon bg-info bg-opacity-10 text-info">
+                <i class="bi bi-currency-dollar"></i>
+            </div>
+            <div>
+                <div class="text-muted small">Estimasi MRR</div>
+                <div class="fs-4 fw-bold lh-1 mt-1 text-truncate" style="max-width: 120px;">
+                    {{ 'Rp ' . number_format(\App\Services\BillingService::calculateMRR(), 0, ',', '.') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="row mt-4">
+    <!-- Kolom Kiri: Tabel Terbaru -->
+    <div class="col-12 col-lg-8">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="text-primary fw-bold" style="font-size: 0.9rem; color: var(--primary-neon) !important;">Langganan Terbaru</span>
+                <a href="{{ route('admin.subscriptions.index') }}" class="btn btn-outline-secondary btn-sm" style="font-size: 0.75rem;">Lihat Semua</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Pengguna</th>
+                                <th>Paket</th>
+                                <th>Status</th>
+                                <th>Bergabung Pada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $recentSubs = \App\Models\Subscription::with(['user', 'plan'])->latest()->take(5)->get();
+                            @endphp
+                            
+                            @forelse($recentSubs as $sub)
+                                <tr>
+                                    <td>
+                                        <div class="fw-bold">{{ $sub->user->name ?? '-' }}</div>
+                                        <div class="text-muted small">{{ $sub->user->email ?? '-' }}</div>
+                                    </td>
+                                    <td>{{ $sub->plan->name ?? '-' }}</td>
+                                    <td>
+                                        @if($sub->status === 'active')
+                                            <span class="badge bg-success bg-opacity-10 text-success">Aktif</span>
+                                        @elseif($sub->status === 'canceled')
+                                            <span class="badge bg-danger bg-opacity-10 text-danger">Dibatalkan</span>
+                                        @else
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary">{{ ucfirst($sub->status) }}</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-muted small">{{ $sub->created_at->diffForHumans() }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-muted">Belum ada langganan.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Quick Stats Cards -->
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted small fw-bold">TOTAL PAKET AKTIF</span>
-                <span class="badge bg-primary bg-opacity-10 text-primary fs-5"><i class="bi bi-tags-fill"></i></span>
+    <!-- Kolom Kanan: Akses Cepat & Akun -->
+    <div class="col-12 col-lg-4 mt-4 mt-lg-0 d-flex flex-column gap-4">
+        <!-- Akses Cepat -->
+        <div class="card">
+            <div class="card-header">
+                <span class="text-primary fw-bold" style="font-size: 0.9rem; color: var(--primary-neon) !important;">Akses Cepat</span>
             </div>
-            <h2 class="fw-bold text-white mb-1">{{ \App\Models\Plan::active()->count() }}</h2>
-            <span class="text-secondary small">Paket terdaftar di publik</span>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted small fw-bold">USER BERLANGGANAN</span>
-                <span class="badge bg-success bg-opacity-10 text-success fs-5"><i class="bi bi-people-fill"></i></span>
-            </div>
-            <h2 class="fw-bold text-white mb-1">{{ \App\Models\Subscription::active()->count() }}</h2>
-            <span class="text-secondary small">Akun berstatus aktif</span>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted small fw-bold">INVOICES TERTUNDA</span>
-                <span class="badge bg-warning bg-opacity-10 text-warning fs-5"><i class="bi bi-hourglass-split"></i></span>
-            </div>
-            <h2 class="fw-bold text-white mb-1">{{ \App\Models\Invoice::where('status', 'pending')->count() }}</h2>
-            <span class="text-secondary small">Menunggu pembayaran</span>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card p-3">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted small fw-bold">ESTIMASI MRR</span>
-                <span class="badge bg-info bg-opacity-10 text-info fs-5"><i class="bi bi-currency-dollar"></i></span>
-            </div>
-            <h2 class="fw-bold text-white mb-1" style="font-family: 'Outfit', sans-serif;">
-                {{ 'Rp ' . number_format(\App\Services\BillingService::calculateMRR(), 0, ',', '.') }}
-            </h2>
-            <span class="text-secondary small">Monthly Recurring Revenue</span>
-        </div>
-    </div>
-
-    <!-- Administrative Operations Guidance -->
-    <div class="col-12 col-lg-6">
-        <div class="card h-100">
-            <div class="card-header"><i class="bi bi-gear-fill me-2 text-primary"></i>Aksi Cepat Admin</div>
-            <div class="card-body d-flex flex-column gap-3">
-                <a href="{{ route('admin.plans.create') }}" class="btn btn-neon-primary py-3">
-                    <i class="bi bi-plus-circle me-2"></i>Buat Paket Langganan Baru
+            <div class="card-body p-3 d-flex flex-column gap-2">
+                <a href="{{ route('admin.plans.create') }}" class="btn btn-primary w-100 text-center d-flex justify-content-center align-items-center gap-2 mb-1">
+                    <i class="bi bi-plus-circle"></i> Buat Paket Baru
                 </a>
-                <a href="{{ route('admin.plans.index') }}" class="btn btn-neon-secondary py-3 text-start">
-                    <i class="bi bi-tags-fill me-3 text-info"></i>Kelola Paket & Feature List
+                <a href="{{ route('admin.plans.index') }}" class="btn btn-outline-secondary w-100 text-start d-flex align-items-center bg-transparent">
+                    <i class="bi bi-tags text-muted me-3"></i> 
+                    <span class="text-dark" style="font-size: 0.85rem;">Kelola Paket</span>
                 </a>
-                <a href="{{ route('admin.subscriptions.index') }}" class="btn btn-neon-secondary py-3 text-start">
-                    <i class="bi bi-people-fill me-3 text-success"></i>Kelola Langganan Pengguna
+                <a href="{{ route('admin.subscriptions.index') }}" class="btn btn-outline-secondary w-100 text-start d-flex align-items-center bg-transparent">
+                    <i class="bi bi-people text-muted me-3"></i> 
+                    <span class="text-dark" style="font-size: 0.85rem;">Pengguna Langganan</span>
+                </a>
+                <a href="{{ route('admin.invoices.index') }}" class="btn btn-outline-secondary w-100 text-start d-flex align-items-center bg-transparent">
+                    <i class="bi bi-shield-lock text-muted me-3"></i> 
+                    <span class="text-dark" style="font-size: 0.85rem;">Tagihan & Pembayaran</span>
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="col-12 col-lg-6">
-        <div class="card h-100">
-            <div class="card-header"><i class="bi bi-activity me-2 text-info"></i>System Log Aset</div>
-            <div class="card-body">
-                <div class="text-center py-4">
-                    <i class="bi bi-database-check text-success fs-1 mb-2"></i>
-                    <p class="text-secondary small mb-0">Database dan Layanan Terhubung dengan Lancar.</p>
-                    <span class="badge bg-secondary mt-2 px-3 py-1">MySQL Lokal: OK</span>
+        <!-- Akun Anda -->
+        <div class="card">
+            <div class="card-header">
+                <span class="text-primary fw-bold" style="font-size: 0.9rem; color: var(--primary-neon) !important;">Akun Anda</span>
+            </div>
+            <div class="card-body p-3">
+                <div class="text-muted small mb-2">{{ auth()->user()->email ?? 'admin@gmail.com' }}</div>
+                <div class="badge bg-danger bg-opacity-10 text-danger mb-4" style="letter-spacing: 0.5px;">ADMINISTRATOR</div>
+                <div class="d-flex align-items-center text-success small fw-medium">
+                    <i class="bi bi-check-circle me-2"></i> Akses penuh ke seluruh modul
                 </div>
             </div>
         </div>

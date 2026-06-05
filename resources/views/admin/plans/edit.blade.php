@@ -1,14 +1,12 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Ubah Paket')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold text-white"><i class="bi bi-pencil-square text-primary me-2"></i>Ubah Paket</h2>
-            <p class="text-secondary mb-0" style="color: var(--text-muted);">Ubah spesifikasi, harga, atau keuntungan paket {{ $plan->name }}.</p>
-        </div>
-        <a href="{{ route('admin.plans.index') }}" class="btn btn-neon-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Kembali
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <a href="{{ route('admin.plans.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Kembali
         </a>
     </div>
 

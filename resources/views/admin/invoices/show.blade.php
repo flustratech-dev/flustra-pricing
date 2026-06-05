@@ -1,14 +1,12 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Detail Invoice')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold text-white"><i class="bi bi-file-earmark-text text-info me-2"></i>Detail Invoice Pembayaran</h2>
-            <p class="text-secondary mb-0" style="color: var(--text-muted);">Informasi detail billing, nominal PPN, serta riwayat konfirmasi transaksi.</p>
-        </div>
-        <a href="{{ route('admin.invoices.index') }}" class="btn btn-neon-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Kembali
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <a href="{{ route('admin.invoices.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Kembali
         </a>
     </div>
 
@@ -26,7 +24,7 @@
         <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-10 pb-3 mb-4">
                 <div>
-                    <h5 class="fw-bold text-white mb-1">INVOICE: {{ $invoice->invoice_number }}</h5>
+                    <h5 class="fw-bold text-dark mb-1">INVOICE: {{ $invoice->invoice_number }}</h5>
                     <span class="text-secondary small">Diterbitkan: {{ $invoice->created_at?->format('d M Y H:i') }}</span>
                 </div>
                 <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : ($invoice->status === 'pending' ? 'warning' : 'danger') }} px-3 py-2 fs-6">
@@ -37,12 +35,12 @@
             <div class="row g-4 mb-4">
                 <div class="col-md-6">
                     <span class="text-muted small d-block mb-1">DITAGIHKAN KEPADA:</span>
-                    <strong class="text-white d-block">{{ $invoice->subscription->user->name }}</strong>
+                    <strong class="text-dark d-block">{{ $invoice->subscription->user->name }}</strong>
                     <span class="text-secondary small">{{ $invoice->subscription->user->email }}</span>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <span class="text-muted small d-block mb-1">MASA PENAGIHAN:</span>
-                    <strong class="text-white d-block">{{ $invoice->billing_period_start?->format('d M Y') }} - {{ $invoice->billing_period_end?->format('d M Y') }}</strong>
+                    <strong class="text-dark d-block">{{ $invoice->billing_period_start?->format('d M Y') }} - {{ $invoice->billing_period_end?->format('d M Y') }}</strong>
                     <span class="text-secondary small">Jatuh Tempo: {{ $invoice->due_date?->format('d M Y') }}</span>
                 </div>
             </div>
@@ -72,7 +70,7 @@
                 <div class="col-md-5 text-end">
                     <div class="d-flex justify-content-between mb-2 text-secondary">
                         <span>Subtotal:</span>
-                        <span class="text-white">{{ $invoice->getFormattedAmount() }}</span>
+                        <span class="text-dark">{{ $invoice->getFormattedAmount() }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-3 text-secondary">
                         <span>Total Bayar:</span>
@@ -84,12 +82,12 @@
             <div class="border-top border-secondary border-opacity-10 pt-4 d-flex gap-3 justify-content-end">
                 <form action="{{ route('admin.invoices.send', $invoice) }}" method="POST" class="m-0">
                     @csrf
-                    <button type="submit" class="btn btn-neon-secondary">
+                    <button type="submit" class="btn btn-outline-secondary">
                         <i class="bi bi-envelope-fill me-2"></i>Kirim Email Pengingat
                     </button>
                 </form>
                 @if($invoice->status === 'paid')
-                    <button class="btn btn-neon-primary" disabled>
+                    <button class="btn btn-primary" disabled>
                         <i class="bi bi-patch-check-fill me-2"></i>Invoice Lunas
                     </button>
                 @endif

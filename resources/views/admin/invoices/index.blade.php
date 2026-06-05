@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Tagihan & Invoices')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12">
-        <h2 class="fw-bold text-white"><i class="bi bi-file-earmark-text text-primary me-2"></i>Invoices & Billing History</h2>
-        <p class="text-secondary" style="color: var(--text-muted);">Lihat seluruh transaksi pembayaran, verifikasi status, dan kirim pengingat manual.</p>
+    <div class="col-12 mb-2">
+        <p class="text-muted mb-0 small">Lihat seluruh transaksi pembayaran, verifikasi status, dan kirim pengingat manual.</p>
     </div>
 
     <!-- Filters -->
@@ -23,12 +24,12 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-neon-primary w-100 py-2">
+                    <button type="submit" class="btn btn-primary w-100 py-2">
                         <i class="bi bi-funnel-fill me-2"></i>Filter
                     </button>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{ route('admin.invoices.index') }}" class="btn btn-neon-secondary w-100 py-2">
+                    <a href="{{ route('admin.invoices.index') }}" class="btn btn-outline-secondary w-100 py-2">
                         <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
                     </a>
                 </div>
@@ -56,7 +57,7 @@
                         @forelse($invoices as $inv)
                             <tr>
                                 <td>
-                                    <strong class="text-white text-uppercase" style="font-size: 0.85rem;">{{ $inv->invoice_number }}</strong>
+                                    <strong class="text-dark text-uppercase" style="font-size: 0.85rem;">{{ $inv->invoice_number }}</strong>
                                 </td>
                                 <td>
                                     <strong>{{ $inv->subscription->user->name }}</strong>

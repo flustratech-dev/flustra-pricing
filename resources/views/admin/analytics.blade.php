@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Statistik')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12">
-        <h2 class="fw-bold text-white"><i class="bi bi-graph-up-arrow text-info me-2"></i>Analisis Pendapatan & Langganan</h2>
-        <p class="text-secondary" style="color: var(--text-muted);">Pantau status kesehatan finansial Flustra berdasarkan data riil dari sistem.</p>
+    <div class="col-12 mb-2">
+        <p class="text-muted mb-0 small">Pantau status kesehatan finansial Flustra berdasarkan data riil dari sistem.</p>
     </div>
 
     <!-- Revenue Cards -->
     <div class="col-12 col-md-6 col-lg-3">
         <div class="card p-3">
             <span class="text-muted small fw-bold mb-2">ESTIMASI MRR</span>
-            <h2 class="fw-bold text-white" style="font-family: 'Outfit', sans-serif;">
+            <h2 class="fw-bold text-dark" style="font-family: 'Outfit', sans-serif;">
                 {{ 'Rp ' . number_format($mrr, 0, ',', '.') }}
             </h2>
             <span class="text-secondary small">Pendapatan bulanan berulang</span>
@@ -21,7 +22,7 @@
     <div class="col-12 col-md-6 col-lg-3">
         <div class="card p-3">
             <span class="text-muted small fw-bold mb-2">TAHUNAN ARR (ESTIMASI)</span>
-            <h2 class="fw-bold text-white" style="font-family: 'Outfit', sans-serif;">
+            <h2 class="fw-bold text-dark" style="font-family: 'Outfit', sans-serif;">
                 {{ 'Rp ' . number_format($mrr * 12, 0, ',', '.') }}
             </h2>
             <span class="text-secondary small">Annual Recurring Revenue</span>

@@ -1,14 +1,13 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Kelola Paket')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold text-white"><i class="bi bi-tags-fill text-primary me-2"></i>Daftar Paket Berlangganan</h2>
-            <p class="text-secondary mb-0" style="color: var(--text-muted);">Kelola paket, tier, harga bulanan/tahunan, serta keuntungan fitur pendukung.</p>
-        </div>
-        <a href="{{ route('admin.plans.create') }}" class="btn btn-neon-primary">
-            <i class="bi bi-plus-circle me-2"></i>Buat Paket Baru
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <p class="text-muted mb-0 small">Kelola paket, tier, harga bulanan/tahunan, serta keuntungan fitur pendukung.</p>
+        <a href="{{ route('admin.plans.create') }}" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-circle me-1"></i> Buat Paket Baru
         </a>
     </div>
 

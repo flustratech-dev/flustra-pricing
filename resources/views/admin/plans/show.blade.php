@@ -1,20 +1,16 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Rincian Paket')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold text-white"><i class="bi bi-tag-fill text-info me-2"></i>Rincian Paket</h2>
-            <p class="text-secondary mb-0" style="color: var(--text-muted);">Lihat spesifikasi teknis, harga, serta keuntungan fitur yang ditawarkan.</p>
-        </div>
-        <div class="d-flex gap-2">
-            <a href="{{ route('admin.plans.index') }}" class="btn btn-neon-secondary">
-                <i class="bi bi-arrow-left me-2"></i>Daftar Paket
-            </a>
-            <a href="{{ route('admin.plans.edit', $plan) }}" class="btn btn-neon-primary">
-                <i class="bi bi-pencil-fill me-2"></i>Ubah Paket
-            </a>
-        </div>
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <a href="{{ route('admin.plans.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Kembali
+        </a>
+        <a href="{{ route('admin.plans.edit', $plan) }}" class="btn btn-primary btn-sm">
+            <i class="bi bi-pencil-fill me-1"></i> Ubah Paket
+        </a>
     </div>
 
     @if ($message = Session::get('success'))
@@ -35,11 +31,11 @@
                 <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
                     <li class="d-flex justify-content-between">
                         <span>Nama Paket:</span>
-                        <strong class="text-white">{{ $plan->name }}</strong>
+                        <strong class="text-dark">{{ $plan->name }}</strong>
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Slug:</span>
-                        <strong class="text-white">{{ $plan->slug }}</strong>
+                        <strong class="text-dark">{{ $plan->slug }}</strong>
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Kategori:</span>
@@ -51,11 +47,11 @@
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Harga Bulanan:</span>
-                        <strong class="text-white">{{ 'Rp ' . number_format($plan->price_monthly, 0, ',', '.') }}</strong>
+                        <strong class="text-dark">{{ 'Rp ' . number_format($plan->price_monthly, 0, ',', '.') }}</strong>
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Harga Tahunan:</span>
-                        <strong class="text-white">{{ 'Rp ' . number_format($plan->price_yearly, 0, ',', '.') }}</strong>
+                        <strong class="text-dark">{{ 'Rp ' . number_format($plan->price_yearly, 0, ',', '.') }}</strong>
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Diskon Tahunan:</span>
@@ -69,15 +65,15 @@
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Tanda Populer:</span>
-                        <strong class="text-white">{{ $plan->is_popular ? 'Ya' : 'Tidak' }}</strong>
+                        <strong class="text-dark">{{ $plan->is_popular ? 'Ya' : 'Tidak' }}</strong>
                     </li>
                     <li class="d-flex justify-content-between">
                         <span>Urutan Tampil:</span>
-                        <strong class="text-white">Ke-{{ $plan->display_order }}</strong>
+                        <strong class="text-dark">Ke-{{ $plan->display_order }}</strong>
                     </li>
                     <li class="d-flex flex-column border-top border-secondary border-opacity-10 pt-3">
                         <span class="text-muted small mb-2">Deskripsi Paket:</span>
-                        <p class="text-white small mb-0">{{ $plan->description ?: 'Tidak ada deskripsi.' }}</p>
+                        <p class="text-dark small mb-0">{{ $plan->description ?: 'Tidak ada deskripsi.' }}</p>
                     </li>
                 </ul>
             </div>
@@ -94,7 +90,7 @@
                         <div class="d-flex align-items-center gap-3 p-2 rounded-3" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);">
                             <div class="fs-5 text-success"><i class="bi {{ $feat->icon_class ?: 'bi-check-circle-fill' }}"></i></div>
                             <div>
-                                <h6 class="mb-0 text-white font-semibold" style="font-size: 0.95rem;">{{ $feat->feature_name }}</h6>
+                                <h6 class="mb-0 text-dark font-semibold" style="font-size: 0.95rem;">{{ $feat->feature_name }}</h6>
                                 @if($feat->feature_description)
                                     <small class="text-secondary">{{ $feat->feature_description }}</small>
                                 @endif

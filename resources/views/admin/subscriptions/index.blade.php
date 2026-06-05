@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Pengguna Langganan')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12">
-        <h2 class="fw-bold text-white"><i class="bi bi-people-fill text-primary me-2"></i>Kelola Langganan Pengguna</h2>
-        <p class="text-secondary" style="color: var(--text-muted);">Lihat detail berlangganan, upgrade, downgrade, batalkan, atau perbarui langganan secara manual.</p>
+    <div class="col-12 mb-2">
+        <p class="text-muted mb-0 small">Lihat detail berlangganan, upgrade, downgrade, batalkan, atau perbarui langganan secara manual.</p>
     </div>
 
     <!-- Stats summary inside subscriptions page -->
@@ -23,7 +24,7 @@
     <div class="col-12 col-md-4">
         <div class="card p-3 text-center">
             <span class="text-muted small fw-bold mb-1">SISTEM REVENUE MRR</span>
-            <h3 class="fw-bold text-white" style="font-family: 'Outfit', sans-serif;">
+            <h3 class="fw-bold text-dark">
                 {{ 'Rp ' . number_format(\App\Services\BillingService::calculateMRR(), 0, ',', '.') }}
             </h3>
         </div>
@@ -58,12 +59,12 @@
                 </div>
 
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-neon-primary w-100 py-2">
+                    <button type="submit" class="btn btn-primary w-100 py-2">
                         <i class="bi bi-funnel-fill me-2"></i>Filter
                     </button>
                 </div>
                 <div class="col-md-2">
-                    <a href="{{ route('admin.subscriptions.index') }}" class="btn btn-neon-secondary w-100 py-2">
+                    <a href="{{ route('admin.subscriptions.index') }}" class="btn btn-outline-secondary w-100 py-2">
                         <i class="bi bi-arrow-counterclockwise me-2"></i>Reset
                     </a>
                 </div>

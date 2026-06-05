@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Admin Dashboard - Flustra</title>
+    <title>@yield('page_title', 'Admin Panel') - Flustra</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5 CSS & Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,35 +19,34 @@
     <!-- Custom Dashboard Styles -->
     <style>
         :root {
-            --bg-color: #FDFBF7; /* cream-50 */
-            --sidebar-bg: #F9F6EE; /* cream-100 */
-            --surface-color: #F9F6EE; /* cream-100 */
-            --primary-neon: #8B5E3C; /* brown */
-            --secondary-neon: rgba(139, 94, 60, 0.8); /* brown/80 */
-            --text-main: #332D24; /* cream-900 */
-            --text-muted: #5C5243; /* cream-800 */
-            --border-color: #EFEAE0; /* cream-200 */
+            --bg-color: #f8f9fa; /* very light grey */
+            --sidebar-bg: #ffffff; /* white */
+            --surface-color: #ffffff; /* white */
+            --primary-neon: #4f46e5; /* indigo-600 */
+            --secondary-neon: #4338ca; /* indigo-700 */
+            --text-main: #1f2937; /* gray-800 */
+            --text-muted: #6b7280; /* gray-500 */
+            --border-color: #e5e7eb; /* gray-200 */
             
-            --hover-bg: rgba(139, 94, 60, 0.1); /* brown/10 */
-            --active-bg: #EFEAE0; /* cream-200 */
-            --active-text: #332D24; /* cream-900 */
-            --toggle-bg: #8B5E3C; /* brown */
-            --toggle-hover: #5E3E25; /* dark accent brown */
+            --hover-bg: #f3f4f6; /* gray-100 */
+            --active-bg: #eef2ff; /* indigo-50 */
+            --active-text: #4f46e5; /* indigo-600 */
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             color: var(--text-main);
+            letter-spacing: -0.025em;
         }
 
-        /* Sidebar styling */
         .sidebar {
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
@@ -55,25 +54,45 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 260px;
+            width: 250px;
             z-index: 100;
-            padding-top: 1.5rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-brand {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.3rem;
-            color: var(--text-muted) !important;
-            text-decoration: none;
-            padding: 0 1.5rem 1.5rem 1.5rem;
-            display: block;
+            padding: 0 1.5rem;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 1.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            height: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        .sidebar-brand-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary-neon);
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-brand-subtitle {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .sidebar-category {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-main); /* Diperjelas agar tidak nyaru */
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
         }
 
         .sidebar-nav {
@@ -85,41 +104,42 @@
         .sidebar-nav-link {
             display: flex;
             align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: var(--text-muted) !important;
+            padding: 0.6rem 1rem;
+            margin: 0.2rem 1rem;
+            border-radius: 8px;
+            color: var(--text-main) !important;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.85rem;
             transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-            white-space: nowrap;
         }
 
         .sidebar-nav-link i {
-            font-size: 1.2rem;
-            margin-right: 1rem;
+            font-size: 1.1rem;
+            margin-right: 0.75rem;
             width: 20px;
             text-align: center;
             color: var(--text-muted);
-            transition: margin 0.3s ease;
         }
 
         .sidebar-nav-link:hover {
-            color: var(--active-text) !important;
             background: var(--hover-bg);
-        }
-
-        .sidebar-nav-link:hover i {
-            color: var(--active-text) !important;
         }
 
         .sidebar-nav-link.active {
             color: var(--active-text) !important;
             background: var(--active-bg);
-            border-left-color: var(--primary-neon);
+            font-weight: 600;
         }
 
         .sidebar-nav-link.active i {
             color: var(--active-text) !important;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
         }
 
         /* Sidebar Collapsed States */
@@ -132,22 +152,22 @@
             text-align: center;
         }
 
-        .sidebar.collapsed .sidebar-brand span {
+        .sidebar.collapsed .sidebar-brand-title span,
+        .sidebar.collapsed .sidebar-brand-subtitle,
+        .sidebar.collapsed .sidebar-category,
+        .sidebar.collapsed .sidebar-nav-link span,
+        .sidebar.collapsed .sidebar-footer .user-profile .ms-2 {
             display: none;
         }
-
-        .sidebar.collapsed .sidebar-brand i {
-            margin: 0 !important;
+        
+        .sidebar.collapsed .sidebar-brand-title {
             font-size: 1.5rem;
         }
 
         .sidebar.collapsed .sidebar-nav-link {
             padding: 0.8rem 0;
             justify-content: center;
-        }
-
-        .sidebar.collapsed .sidebar-nav-link span {
-            display: none;
+            margin: 0.2rem 0.5rem;
         }
 
         .sidebar.collapsed .sidebar-nav-link i {
@@ -157,9 +177,10 @@
 
         /* Main Content wrapper */
         .main-wrapper {
-            margin-left: 260px;
-            padding: 2rem;
+            margin-left: 250px;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -170,32 +191,40 @@
         /* Header Navbar */
         .admin-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            padding: 0 2rem;
+            height: 75px;
+            background-color: var(--sidebar-bg);
+        }
+
+        .page-content-wrapper {
+            padding: 1.5rem 2rem;
+            flex-grow: 1;
+        }
+
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0;
         }
 
         /* Desktop Sidebar Toggle Button */
         .sidebar-toggle-btn {
-            background-color: var(--toggle-bg);
-            color: #ffffff !important;
+            background: transparent;
+            color: var(--text-muted);
             border: none;
-            border-radius: 8px;
-            width: 36px;
-            height: 36px;
+            padding: 0;
+            margin-right: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .sidebar-toggle-btn:hover {
-            background-color: var(--toggle-hover);
-            color: #ffffff !important;
-            transform: scale(1.05);
+            color: var(--text-main);
         }
 
         /* Card Overrides */
@@ -203,15 +232,15 @@
             background-color: var(--surface-color) !important;
             border: 1px solid var(--border-color) !important;
             color: var(--text-main) !important;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(139, 94, 60, 0.05), 0 2px 4px -2px rgba(139, 94, 60, 0.05) !important;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
             overflow: hidden;
         }
 
         .card-header {
-            background-color: var(--hover-bg) !important;
+            background-color: transparent !important;
             border-bottom: 1px solid var(--border-color) !important;
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.5rem;
             font-weight: 600;
             color: var(--text-main) !important;
         }
@@ -220,173 +249,221 @@
             padding: 1.5rem;
         }
 
-        /* Global overrides for dark mode classes inside admin layout */
-        .text-white {
-            color: var(--text-main) !important;
-        }
-
-        .text-secondary {
-            color: var(--text-muted) !important;
-        }
-
-        .text-muted {
-            color: var(--text-muted) !important;
-        }
-
-        .bg-opacity-10 {
-            background-color: rgba(139, 94, 60, 0.12) !important;
-        }
-
-        /* Premium Buttons */
-        .btn-neon-primary {
-            background: linear-gradient(135deg, var(--primary-neon) 0%, var(--secondary-neon) 100%) !important;
-            color: #ffffff !important;
-            border: 1px solid var(--border-color) !important;
-            font-weight: 600;
-            padding: 0.6rem 1.5rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 94, 60, 0.15);
-        }
-
-        .btn-neon-primary:hover {
-            background: linear-gradient(135deg, var(--secondary-neon) 0%, var(--primary-neon) 100%) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(139, 94, 60, 0.25);
-            color: #ffffff !important;
-        }
-
-        .btn-neon-secondary {
-            background: var(--active-bg) !important;
-            border: 1px solid var(--border-color) !important;
-            color: var(--active-text) !important;
-            font-weight: 600;
-            padding: 0.6rem 1.5rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-neon-secondary:hover {
-            background: var(--hover-bg) !important;
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--primary-neon) !important;
             border-color: var(--primary-neon) !important;
-            color: var(--active-text) !important;
+            color: #ffffff !important;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-neon) !important;
+            border-color: var(--secondary-neon) !important;
+        }
+
+        .btn-outline-secondary {
+            border-color: var(--border-color);
+            color: var(--text-muted);
+            border-radius: 8px;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: var(--hover-bg);
+            color: var(--text-main);
         }
 
         /* Table styles */
         .table {
             color: var(--text-main) !important;
+            margin-bottom: 0;
         }
-        .table-light {
-            --bs-table-bg: var(--active-bg) !important;
-            --bs-table-border-color: var(--border-color) !important;
-            color: var(--active-text) !important;
-        }
-        .table tbody tr {
+        .table th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-main);
             border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+            background-color: #f9fafb;
+        }
+        .table td {
+            font-size: 0.85rem;
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .table tbody tr:last-child td {
+            border-bottom: none;
         }
         .table tbody tr:hover {
             background-color: var(--hover-bg) !important;
         }
 
-        /* Pagination overrides */
-        .pagination .page-link {
-            background-color: var(--surface-color);
-            border-color: var(--border-color);
-            color: var(--text-main);
-        }
-        .pagination .page-item.active .page-link {
-            background-color: var(--primary-neon);
-            border-color: var(--primary-neon);
-            color: #ffffff !important;
-        }
-
-        /* Ambient badge colors */
-        .badge {
-            font-weight: 600;
-            padding: 0.4em 0.8em;
-            border-radius: 6px;
-        }
-
         /* Forms styling for admin panels */
         .form-control, .form-select, .form-check-input {
-            background-color: var(--bg-color) !important;
+            background-color: #ffffff !important;
             border: 1px solid var(--border-color) !important;
             color: var(--text-main) !important;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
         }
         
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-neon) !important;
-            box-shadow: 0 0 0 0.25rem rgba(139, 94, 60, 0.25) !important;
+            box-shadow: 0 0 0 0.15rem rgba(79, 70, 229, 0.25) !important;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+        
+        /* Metric Card Icon Container */
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Mobile Layout */
+        @media (max-width: 767.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            .main-wrapper {
+                margin-left: 0;
+            }
+            .admin-header {
+                padding: 0 1rem;
+            }
+            .page-content-wrapper {
+                padding: 1rem;
+            }
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(2px);
+                z-index: 99;
+                display: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .sidebar-overlay.show {
+                display: block;
+                opacity: 1;
+            }
+            
+            /* Sembunyikan efek toggle pada desktop di mobile */
+            .main-wrapper.collapsed {
+                margin-left: 0;
+            }
         }
     </style>
     @stack('styles')
 </head>
 <body>
 
+    <!-- Overlay untuk Sidebar Mobile -->
+    <div class="sidebar-overlay d-md-none" id="sidebarOverlay"></div>
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <i class="bi bi-shield-lock-fill text-warning me-2"></i><span>FLUSTRA ADMIN</span>
+            <div class="sidebar-brand-title">FLUSTRA</div>
+            <div class="sidebar-brand-subtitle">Pricing Admin</div>
         </a>
-        <ul class="sidebar-nav">
-            <li>
-                <a href="{{ route('admin.dashboard') }}" class="sidebar-nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i><span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.plans.index') }}" class="sidebar-nav-link {{ Route::is('admin.plans.*') ? 'active' : '' }}">
-                    <i class="bi bi-tags"></i><span>Kelola Paket</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.subscriptions.index') }}" class="sidebar-nav-link {{ Route::is('admin.subscriptions.*') ? 'active' : '' }}">
-                    <i class="bi bi-people"></i><span>Kelola Langganan</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.invoices.index') }}" class="sidebar-nav-link {{ Route::is('admin.invoices.*') ? 'active' : '' }}">
-                    <i class="bi bi-file-earmark-text"></i><span>Invoices / Billing</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.analytics') }}" class="sidebar-nav-link {{ Route::is('admin.analytics') ? 'active' : '' }}">
-                    <i class="bi bi-graph-up-arrow"></i><span>Statistik & MRR</span>
-                </a>
-            </li>
-            <li class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
-                <a href="{{ route('plans.index') }}" class="sidebar-nav-link">
-                    <i class="bi bi-arrow-left-circle"></i><span>Kembali ke Web</span>
-                </a>
-            </li>
-        </ul>
+
+        <div class="sidebar-menu-wrapper flex-grow-1 overflow-auto" style="scrollbar-width: thin;">
+            <ul class="sidebar-nav">
+                <li class="sidebar-category">UTAMA</li>
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="sidebar-nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                        <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.plans.index') }}" class="sidebar-nav-link {{ Route::is('admin.plans.*') ? 'active' : '' }}">
+                        <i class="bi bi-tags"></i><span>Paket</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.subscriptions.index') }}" class="sidebar-nav-link {{ Route::is('admin.subscriptions.*') ? 'active' : '' }}">
+                        <i class="bi bi-people"></i><span>Langganan</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-category mt-3">MANAJEMEN</li>
+                <li>
+                    <a href="{{ route('admin.invoices.index') }}" class="sidebar-nav-link {{ Route::is('admin.invoices.*') ? 'active' : '' }}">
+                        <i class="bi bi-file-earmark-text"></i><span>Tagihan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.analytics') }}" class="sidebar-nav-link {{ Route::is('admin.analytics') ? 'active' : '' }}">
+                        <i class="bi bi-graph-up-arrow"></i><span>Statistik</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-category mt-3">LAINNYA</li>
+                <li>
+                    <a href="{{ route('plans.index') }}" class="sidebar-nav-link">
+                        <i class="bi bi-box-arrow-up-right"></i><span>Form Publik</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile d-flex align-items-center mb-3">
+                <div class="avatar text-white d-flex align-items-center justify-content-center fw-bold rounded-circle flex-shrink-0" style="width: 36px; height: 36px; background-color: var(--primary-neon); font-size: 0.85rem;">
+                    {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 2)) }}
+                </div>
+                <div class="ms-2 text-truncate">
+                    <div class="fw-bold text-dark text-truncate" style="font-size: 0.85rem;">{{ auth()->user()->name ?? 'Admin User' }}</div>
+                    <div class="text-muted" style="font-size: 0.75rem;">Administrator</div>
+                </div>
+            </div>
+            <form method="POST" action="{{ route('logout') }}" class="m-0 w-100">
+                @csrf
+                <button type="submit" class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 py-2">
+                    <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
+                </button>
+            </form>
+        </div>
     </aside>
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <!-- Header -->
         <header class="admin-header">
-            <div class="d-flex align-items-center gap-3">
-                <button id="sidebarToggle" class="sidebar-toggle-btn btn">
-                    <i class="bi bi-chevron-left" id="toggleIcon"></i>
-                </button>
-                <div>
-                    <span class="text-muted small">Halo Admin,</span>
-                    <h5 class="mb-0 fw-bold text-dark">{{ auth()->user()->name }}</h5>
-                </div>
-            </div>
-            <div>
-                <form method="POST" action="{{ route('logout') }}" class="m-0">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="bi bi-box-arrow-right me-1"></i>Keluar
-                    </button>
-                </form>
-            </div>
+            <button id="sidebarToggle" class="sidebar-toggle-btn d-md-none">
+                <i class="bi bi-list fs-3"></i>
+            </button>
+            <h1 class="page-title">@yield('page_title', 'Dashboard')</h1>
         </header>
 
         <!-- Page Content -->
-        @yield('content')
+        <div class="page-content-wrapper">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Bootstrap 5 Bundle JS -->
@@ -396,32 +473,44 @@
             const sidebar = document.querySelector('.sidebar');
             const mainWrapper = document.querySelector('.main-wrapper');
             const sidebarToggle = document.getElementById('sidebarToggle');
-            const toggleIcon = document.getElementById('toggleIcon');
+            const overlay = document.getElementById('sidebarOverlay');
             
-            // Check local storage for preference
+            // Check local storage for preference (only for desktop)
             if (localStorage.getItem('sidebar-collapsed') === 'true') {
-                sidebar.classList.add('collapsed');
-                mainWrapper.classList.add('collapsed');
-                if (toggleIcon) {
-                    toggleIcon.classList.replace('bi-chevron-left', 'bi-chevron-right');
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.add('collapsed');
+                    mainWrapper.classList.add('collapsed');
                 }
             }
             
             if (sidebarToggle) {
                 sidebarToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('collapsed');
-                    mainWrapper.classList.toggle('collapsed');
-                    
-                    const isCollapsed = sidebar.classList.contains('collapsed');
-                    localStorage.setItem('sidebar-collapsed', isCollapsed);
-                    
-                    if (toggleIcon) {
-                        if (isCollapsed) {
-                            toggleIcon.classList.replace('bi-chevron-left', 'bi-chevron-right');
-                        } else {
-                            toggleIcon.classList.replace('bi-chevron-right', 'bi-chevron-left');
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.toggle('mobile-open');
+                        if(overlay) {
+                            if(sidebar.classList.contains('mobile-open')) {
+                                overlay.style.display = 'block';
+                                setTimeout(() => overlay.classList.add('show'), 10);
+                            } else {
+                                overlay.classList.remove('show');
+                                setTimeout(() => overlay.style.display = 'none', 300);
+                            }
                         }
+                    } else {
+                        sidebar.classList.toggle('collapsed');
+                        mainWrapper.classList.toggle('collapsed');
+                        
+                        const isCollapsed = sidebar.classList.contains('collapsed');
+                        localStorage.setItem('sidebar-collapsed', isCollapsed);
                     }
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('show');
+                    setTimeout(() => overlay.style.display = 'none', 300);
                 });
             }
         });

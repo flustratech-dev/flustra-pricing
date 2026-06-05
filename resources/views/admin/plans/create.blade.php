@@ -1,14 +1,12 @@
 @extends('layouts.admin')
 
+@section('page_title', 'Buat Paket Baru')
+
 @section('content')
 <div class="row g-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold text-white"><i class="bi bi-plus-circle-fill text-primary me-2"></i>Buat Paket Baru</h2>
-            <p class="text-secondary mb-0" style="color: var(--text-muted);">Masukkan detail lengkap spesifikasi paket langganan Flustra.</p>
-        </div>
-        <a href="{{ route('admin.plans.index') }}" class="btn btn-neon-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Kembali
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <a href="{{ route('admin.plans.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Kembali
         </a>
     </div>
 
@@ -19,8 +17,8 @@
             @include('admin.plans.form-partial')
 
             <div class="d-flex gap-3 justify-content-end mt-4">
-                <a href="{{ route('admin.plans.index') }}" class="btn btn-neon-secondary">Batal</a>
-                <button type="submit" class="btn btn-neon-primary px-4"><i class="bi bi-save me-2"></i>Simpan Paket</button>
+                <a href="{{ route('admin.plans.index') }}" class="btn btn-outline-secondary">Batal</a>
+                <button type="submit" class="btn btn-primary px-4"><i class="bi bi-save me-2"></i>Simpan Paket</button>
             </div>
         </form>
     </div>

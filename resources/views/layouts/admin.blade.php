@@ -54,7 +54,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 250px;
+            width: 220px;
             z-index: 100;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -64,7 +64,7 @@
         .sidebar-brand {
             padding: 0 1.5rem;
             border-bottom: 1px solid var(--border-color);
-            height: 75px;
+            height: 65px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -177,7 +177,7 @@
 
         /* Main Content wrapper */
         .main-wrapper {
-            margin-left: 250px;
+            margin-left: 220px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -194,7 +194,7 @@
             align-items: center;
             border-bottom: 1px solid var(--border-color);
             padding: 0 2rem;
-            height: 75px;
+            height: 65px;
             background-color: var(--sidebar-bg);
         }
 

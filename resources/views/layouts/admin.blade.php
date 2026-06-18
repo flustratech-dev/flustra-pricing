@@ -156,7 +156,8 @@
         .sidebar.collapsed .sidebar-brand-subtitle,
         .sidebar.collapsed .sidebar-category,
         .sidebar.collapsed .sidebar-nav-link span,
-        .sidebar.collapsed .sidebar-footer .user-profile .ms-2 {
+        .sidebar.collapsed .sidebar-footer .user-profile .ms-2,
+        .sidebar.collapsed .sidebar-footer .btn span {
             display: none;
         }
         
@@ -387,7 +388,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <div class="sidebar-brand-title">FLUSTRA</div>
+            <div class="sidebar-brand-title">F<span>LUSTRA</span></div>
             <div class="sidebar-brand-subtitle">Pricing Admin</div>
         </a>
 
@@ -475,13 +476,8 @@
             const sidebarToggle = document.getElementById('sidebarToggle');
             const overlay = document.getElementById('sidebarOverlay');
             
-            // Check local storage for preference (only for desktop)
-            if (localStorage.getItem('sidebar-collapsed') === 'true') {
-                if (window.innerWidth >= 768) {
-                    sidebar.classList.add('collapsed');
-                    mainWrapper.classList.add('collapsed');
-                }
-            }
+            // Hapus sisa state lama (jika ada) agar desktop selalu terbuka
+            localStorage.removeItem('sidebar-collapsed');
             
             if (sidebarToggle) {
                 sidebarToggle.addEventListener('click', function() {
@@ -496,12 +492,6 @@
                                 setTimeout(() => overlay.style.display = 'none', 300);
                             }
                         }
-                    } else {
-                        sidebar.classList.toggle('collapsed');
-                        mainWrapper.classList.toggle('collapsed');
-                        
-                        const isCollapsed = sidebar.classList.contains('collapsed');
-                        localStorage.setItem('sidebar-collapsed', isCollapsed);
                     }
                 });
             }

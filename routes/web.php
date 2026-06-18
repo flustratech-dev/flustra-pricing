@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::post('/checkout/snap-token', [CheckoutController::class, 'getSnapToken'])->name('checkout.snap-token');
+    Route::get('/checkout/callback', [CheckoutController::class, 'callback'])->name('checkout.callback');
     Route::get('/checkout/{plan}', [CheckoutController::class, 'show'])->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'processPayment'])->name('process-payment');
     

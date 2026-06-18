@@ -86,7 +86,7 @@
             <div class="checkout-card">
                 <h4 class="fw-bold mb-4" style="color: var(--text-main);"><i class="bi bi-person-bounding-box me-2" style="color: var(--primary-neon);"></i>Informasi Penagihan</h4>
                 
-                <form action="{{ route('process-payment') }}" method="POST" id="checkoutForm">
+                <form id="checkoutForm">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                     <input type="hidden" name="billing_cycle" value="{{ $billingCycle }}">
@@ -115,17 +115,7 @@
                         @error('full_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label class="form-label">Metode Pembayaran (Simulasi)</label>
-                        <select class="form-select @error('payment_method') is-invalid @enderror" name="payment_method">
-                            <option value="credit_card">Kartu Kredit / Debit (Instan)</option>
-                            <option value="bank_transfer">Transfer Bank (Simulasi Virtual Account)</option>
-                            <option value="e_wallet">E-Wallet (GoPay, OVO, Dana)</option>
-                        </select>
-                        @error('payment_method')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-
-                    <div class="form-check mb-4">
+                    <div class="form-check mb-4 mt-4">
                         <input 
                             class="form-check-input" 
                             type="checkbox" 
@@ -138,7 +128,7 @@
                         </label>
                     </div>
 
-                    <button type="submit" class="btn btn-neon-primary btn-lg w-100 py-3">
+                    <button type="submit" id="payButton" class="btn btn-neon-primary btn-lg w-100 py-3">
                         <i class="bi bi-shield-fill-check me-2"></i>Selesaikan Pembayaran
                     </button>
                 </form>
@@ -185,4 +175,62 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+<script>
+document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const payButton = document.getElementById('payButton');
+    payButton.disabled = true;
+    payButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Memproses...';
+
+    const formData = new FormData(this);
+    
+    try {
+        const response = await fetch('{{ route('checkout.snap-token') }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': formData.get('_token'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                plan_id: formData.get('plan_id'),
+                billing_cycle: formData.get('billing_cycle'),
+                full_name: formData.get('full_name')
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Gagal membuat transaksi.');
+        }
+
+        window.snap.pay(data.snap_token, {
+            onSuccess: function(result) {
+                window.location.href = '/checkout/callback?status=success&plan_id=' + formData.get('plan_id') + '&cycle=' + formData.get('billing_cycle');
+            },
+            onPending: function(result) {
+                alert('Pembayaran tertunda. Silakan selesaikan pembayaran Anda.');
+                payButton.disabled = false;
+                payButton.innerHTML = '<i class="bi bi-shield-fill-check me-2"></i>Selesaikan Pembayaran';
+            },
+            onError: function(result) {
+                alert('Pembayaran gagal. Silakan coba metode pembayaran lain.');
+                payButton.disabled = false;
+                payButton.innerHTML = '<i class="bi bi-shield-fill-check me-2"></i>Selesaikan Pembayaran';
+            },
+            onClose: function() {
+                payButton.disabled = false;
+                payButton.innerHTML = '<i class="bi bi-shield-fill-check me-2"></i>Selesaikan Pembayaran';
+            }
+        });
+    } catch (error) {
+        alert(error.message);
+        payButton.disabled = false;
+        payButton.innerHTML = '<i class="bi bi-shield-fill-check me-2"></i>Selesaikan Pembayaran';
+    }
+});
+</script>
 @endsection
